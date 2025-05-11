@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void subs(vector<int>& arr, int index, int n, vector<int>& res) {
+    if(index == n) {
+        for(auto i: res) {
+            cout<<i<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+    
+    res.push_back(arr[index]);
+    subs(arr, index+1, n, res);
+    res.pop_back();
+    subs(arr, index+1, n, res);
+}
+
+int main() {
+    // Write C++ code here
+    vector<int> arr = {1,2,3};
+    int n = arr.size();
+    vector<int> res;
+    subs(arr, 0, n, res);
+    return 0;
+}
