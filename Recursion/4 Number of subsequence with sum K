@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int subs(vector<int>& arr, int index, int n, int sum, int res) {
+    if(index == n) {
+        if(sum == res) return 1;
+        else return 0;
+    }
+    res += arr[index];
+    int l = subs(arr, index+1, n, sum, res);
+    res -= arr[index];
+    int r = subs(arr, index+1, n, sum, res);
+    return l+r;
+}
+
+int main() {
+    // Write C++ code here
+    vector<int> arr = {1,2,1};
+    int sum = 2;
+    int res = 0;
+    int n = arr.size();
+    cout<<subs(arr, 0, n, sum, res);
+    return 0;
+}
