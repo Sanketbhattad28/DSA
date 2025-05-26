@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int partition(vector<int>& arr, int low, int high) {
+    // Choose the pivot
+    int pivot = arr[low];
+    int i = low;
+    int j = high;
+    
+    while (i < j) {
+        // i -> find ele greater than pivot and stop 
+        while(arr[i] <= pivot && i < high) i++;
+        // j -> find ele less or equal than pivot and stop 
+        while(arr[j] > pivot && j > low) j--;
+        // swap if i < j
+        if (i < j) swap(arr[i], arr[j]);
+    }
+    
+    // Move pivot after smaller elements and
+    // return its position
+    swap(arr[low], arr[j]);  
+    return j;
+}
+
+void quickSort(vector<int>& arr, int low, int high) {
+  
+    if (low < high) {
+        // pi is the partition return index of pivot
+        int pi = partition(arr, low, high);
+        
+        // Recursion calls for smaller elements
+        // and greater or equals elements
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    vector<int> arr = {10, 7, 8, 9, 1, 5};
+    int n = arr.size();
+    quickSort(arr, 0, n - 1);
+  
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    return 0;
+}
